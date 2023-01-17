@@ -21,9 +21,21 @@ mv .env .env.scf
 mv .env.tmp .env
 
 # upload server src
-coscmd -c .cos.src.conf -l cos.log upload -s "dist/skye_server.zip" "/server.zip"
-coscmd -c .cos.src.conf -l cos.log upload -s "scf_layer.zip" "/layer.zip"
+coscmd --bucket "skye-src-1251045573" --config_path ".cos.conf" --log_path "cos.log" upload \
+  --sync \
+  "dist/skye_server.zip" \
+  "/server.zip"
+coscmd --bucket "skye-src-1251045573" --config_path ".cos.conf" --log_path "cos.log" upload \
+  --sync \
+  "scf_layer.zip" \
+  "/layer.zip"
 
 # upload admin static assets
 python manage.py collectstatic --no-input --link
-coscmd -c .cos.assets.conf -l cos.log upload -rsf --delete dist/static/admin /admin
+coscmd --bucket "skye-1251045573" --config_path ".cos.conf" --log_path "cos.log" upload \
+  --recursive \
+  --sync \
+  --force \
+  --delete \
+  "dist/static/admin" \
+  "/admin"
