@@ -43,6 +43,10 @@ def openai_client():
 
         data = openai.Completion.create(**params)
 
+        # sometimes completion_tokens is missed...
+        if not hasattr(data.usage, "completion_tokens"):
+            data.usage.completion_tokens = 0
+
         for kw in KEYWORD_BLACKLIST:
             if kw in data.choices[0].text:
                 return decoy()

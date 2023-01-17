@@ -116,6 +116,7 @@ def ask(request):
     try:
         completion = gpt.create_completion(data["prompts"], data["params"])
     except openai.error.InvalidRequestError as err:
+        print(str(err))
         return JsonResponse(
             {"error": "skye_internal_error"}, status=HTTPStatus.INTERNAL_SERVER_ERROR
         )
@@ -132,7 +133,7 @@ def ask(request):
     return JsonResponse(
         {
             "data": {
-                "completion": completion["completion"],
+                "completion": completion["completion"] or "\n这个我不会，请换一种表述。",
                 "finish_reason": completion["finish_reason"],
             }
         },
