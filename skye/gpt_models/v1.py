@@ -31,6 +31,15 @@ class BaseModel:
         return d
 
 
+class TemperatureModeMixin:
+    def set_params(self, d: dict):
+        self.temperature = {
+            "accurate": 0,
+            "balanced": 0.5,
+            "creative": 1,
+        }.get(d["mode"])
+
+
 class GPTModel(BaseModel):
     codename = "gpt.1"
     model = "text-davinci-003"
@@ -102,3 +111,9 @@ class TitleGeneratorModel(BaseModel):
             "balanced": 0.5,
             "creative": 1,
         }.get(d["mode"])
+
+
+class GreetingGeneratorModel(TemperatureModeMixin, BaseModel):
+    codename = "greeting_generator.1"
+    model = "text-davinci-003"
+    prompt_template = "帮我写一个2023兔年的春节祝福给{prompt}\n"

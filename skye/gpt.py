@@ -66,6 +66,7 @@ AVAILABLE_MODELS = {
     "thesis": v1.ThesisModel,
     "expansion": v1.ExpansionModel,
     "title_generator": v1.TitleGeneratorModel,
+    "greeting_generator": v1.GreetingGeneratorModel,
 }
 
 
