@@ -123,3 +123,14 @@ class PromotionPlannerModel(TemperatureModeMixin, BaseModel):
     codename = "greeting_generator.1"
     model = "text-davinci-003"
     prompt_template = "想几个活动策划，主题是：{prompt}\n"
+
+
+class WeChatMomentsModel(TemperatureModeMixin, BaseModel):
+    codename = "greeting_generator.1"
+    model = "text-davinci-003"
+    prompt_template = (
+        "帮我写一条微信朋友圈，不能有语病、病句。",
+        "要求：{preference}",
+        "主题：{theme}",
+        "朋友圈：",
+    )

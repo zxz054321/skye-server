@@ -68,6 +68,7 @@ AVAILABLE_MODELS = {
     "title_generator": v1.TitleGeneratorModel,
     "greeting_generator": v1.GreetingGeneratorModel,
     "promotion_planner": v1.PromotionPlannerModel,
+    "wechat_moments": v1.WeChatMomentsModel,
 }
 
 
