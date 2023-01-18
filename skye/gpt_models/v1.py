@@ -117,3 +117,9 @@ class GreetingGeneratorModel(TemperatureModeMixin, BaseModel):
     codename = "greeting_generator.1"
     model = "text-davinci-003"
     prompt_template = "帮我写一个2023兔年的春节祝福给{prompt}\n"
+
+
+class PromotionPlannerModel(TemperatureModeMixin, BaseModel):
+    codename = "greeting_generator.1"
+    model = "text-davinci-003"
+    prompt_template = "想几个活动策划，主题是：{prompt}\n"

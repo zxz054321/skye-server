@@ -67,6 +67,7 @@ AVAILABLE_MODELS = {
     "expansion": v1.ExpansionModel,
     "title_generator": v1.TitleGeneratorModel,
     "greeting_generator": v1.GreetingGeneratorModel,
+    "promotion_planner": v1.PromotionPlannerModel,
 }
 
 
