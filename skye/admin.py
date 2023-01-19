@@ -42,7 +42,7 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
     inlines = (ProfileInline,)
-    list_display = ("name", "email", "is_staff")
+    list_display = ("name", "email", "is_staff", "date_joined", "last_login")
 
     @admin.display(ordering="profile__name")
     def name(self, obj):
@@ -51,6 +51,7 @@ class UserAdmin(BaseUserAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     fields = ("name", "is_vip")
+    list_display = ("name", "is_vip")
     actions = None
 
     def has_add_permission(self, request):
