@@ -10,7 +10,7 @@ class BaseModel:
     def __init__(self):
         self._prompt = None
 
-    def prompt(self, **kwargs):
+    def prompt(self, **kwargs) -> str:
         t = self.prompt_template
         if isinstance(t, tuple):
             self._prompt = "\n".join(t).format(**kwargs)
@@ -18,7 +18,7 @@ class BaseModel:
             self._prompt = t.format(**kwargs)
         return self._prompt
 
-    def set_params(self, d: dict):
+    def set_params(self, d: dict) -> None:
         self.__dict__.update(d)
 
     def as_dict(self, **overrides):
