@@ -57,6 +57,26 @@ class DictionaryModel(BaseModel):
     temperature = 0
 
 
+class GrammarModel(BaseModel):
+    codename = "grammar.1"
+    model = "text-davinci-003"
+    temperature = 0
+
+    def set_params(self, d: dict) -> None:
+        if d["lang"] == "en":
+            self.prompt_template = (
+                "Correct sentences to standard English. Point out and explain the errors in the sentences and interpret the grammatical knowledge involved in the errors.\n",
+                'Sentences:"{sentences}"',
+                "Correction:",
+            )
+        elif d["lang"] == "cn":
+            self.prompt_template = (
+                "将句子纠正为标准英语。指出并解释句子中的错误，解释错误中涉及的语法知识。\n",
+                "句子：“{sentences}”",
+                "纠正：",
+            )
+
+
 class ThesisModel(BaseModel):
     codename = "thesis.1"
     model = "text-davinci-003"
