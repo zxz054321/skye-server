@@ -46,13 +46,13 @@ class GPTModel(BaseModel):
     prompt_template = "{prompt}"
 
 
-class DictModel(BaseModel):
+class DictionaryModel(BaseModel):
     codename = "dict.1"
     model = "text-davinci-003"
     prompt_template = (
-        "I want you to act as a dictionary of English and Chinese. I will speak to you in any language and you will detect the language, translate it and answer in the corrected and improved version of my text, in {lang}. I want you to only reply the answers and explain why.\n",
-        "Here is the question: {q}",
-        "Your answer:",
+        "Act as an English-Chinese dictionary. I will ask you questions in Chinese or English and you will detect the language, understand my questions and give answers in {lang}. Your answers will explain clearly why. You cannot make up any facts. Just return only answers and explanations.\n",
+        "Question: {q}",
+        "Answer:",
     )
     temperature = 0
 
