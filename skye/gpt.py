@@ -89,12 +89,12 @@ class GPT:
             return None
 
     def create_completion(self, prompts: dict, params: dict = None):
+        if params:
+            self.model.set_params(params)
+
         prompt = self.model.prompt(**prompts)
         if settings.DEBUG:
             print("*** PROMPT DEBUG START ***\n", prompt, "\n*** PROMPT DEBUG END ***")
-
-        if params:
-            self.model.set_params(params)
 
         max_tokens = 4096 - calculate_tokens(prompt)
         data = self.model.as_dict(max_tokens=max_tokens)
