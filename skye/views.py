@@ -215,6 +215,25 @@ def get_balance(request):
     )
 
 
+@require_safe
+@login_required
+def get_redeemcode_history(request):
+    history = RedeemCode.objects.filter(redeemer=request.user)
+    return JsonResponse(
+        {
+            "data": [
+                {
+                    "code": redeemcode.code,
+                    "amount": redeemcode.amount,
+                    "redeemed_at": redeemcode.redeemed_at,
+                }
+                for redeemcode in history
+            ]
+        },
+        status=HTTPStatus.OK,
+    )
+
+
 def _account(user):
     total_usage = user.completion_set.aggregate(Sum("total_usage"))["total_usage__sum"]
     paid_balance = user.redeemcode_set.aggregate(Sum("amount"))["amount__sum"]

@@ -15,4 +15,5 @@ urlpatterns = [
     path("invitees", views.get_invitees),
     path("redeem", views.redeem),
     path("balance", views.get_balance),
+    path("redeemcodes", views.get_redeemcode_history),
 ]
