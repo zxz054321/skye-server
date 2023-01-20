@@ -408,6 +408,12 @@ class ApiTests(TestCase):
         response = self.client.get("/redeemcodes")
         self.assertEqual(200, response.status_code)
 
+    def test_get_gift_list(self):
+        self._login_skye()
+
+        response = self.client.get("/gifts")
+        self.assertEqual(200, response.status_code)
+
     def _create_friend_user(self) -> User:
         friend = User.objects.create_user(
             username="friend@mail.com", email="friend@mail.com", password="secret"

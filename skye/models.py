@@ -87,8 +87,21 @@ class RedeemCode(models.Model):
 
 
 class Gift(models.Model):
+    REASON_ACCEPTED_INVITATION = "accepted_invitation"
+    REASON_SUCCESSFUL_INVITATION = "successful_invitation"
+    REASON_INVITEE_REDEEMED = "invitee_redeemed"
+
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     amount = models.PositiveIntegerField()
+    reason = models.CharField(
+        max_length=50,
+        choices=(
+            (REASON_ACCEPTED_INVITATION, "Accepted Invitation"),
+            (REASON_SUCCESSFUL_INVITATION, "Successful Invitation"),
+            (REASON_INVITEE_REDEEMED, "Invitee Redeemed"),
+        ),
+        default="",  # default to empty to be compatible with the existing table
+    )
     gifted_at = models.DateTimeField(auto_now_add=True)
 
 

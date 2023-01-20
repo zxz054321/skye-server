@@ -49,8 +49,16 @@ def register(request):
     user.profile.inviter = inviter_profile.user
     with transaction.atomic():
         user.save()
-        Gift.objects.create(user=user, amount=settings.GIFT_AMOUNT)
-        Gift.objects.create(user=user.profile.inviter, amount=settings.GIFT_AMOUNT)
+        Gift.objects.create(
+            user=user,
+            amount=settings.GIFT_AMOUNT,
+            reason=Gift.REASON_ACCEPTED_INVITATION,
+        )
+        Gift.objects.create(
+            user=user.profile.inviter,
+            amount=settings.GIFT_AMOUNT,
+            reason=Gift.REASON_SUCCESSFUL_INVITATION,
+        )
     return HttpResponse(status=HTTPStatus.OK)
 
 
@@ -189,7 +197,9 @@ def redeem(request):
     with transaction.atomic():
         redeemcode.save()
         Gift.objects.create(
-            user=user.profile.inviter, amount=int(redeemcode.amount * 0.03)
+            user=user.profile.inviter,
+            amount=int(redeemcode.amount * 0.03),
+            reason=Gift.REASON_INVITEE_REDEEMED,
         )
     return HttpResponse(status=HTTPStatus.OK)
 
@@ -228,6 +238,25 @@ def get_redeemcode_history(request):
                     "redeemed_at": redeemcode.redeemed_at,
                 }
                 for redeemcode in history
+            ]
+        },
+        status=HTTPStatus.OK,
+    )
+
+
+@require_safe
+@login_required
+def get_gift_list(request):
+    history = request.user.gift_set.all()
+    return JsonResponse(
+        {
+            "data": [
+                {
+                    "amount": gift.amount,
+                    "reason": gift.reason,
+                    "gifted_at": gift.gifted_at,
+                }
+                for gift in history
             ]
         },
         status=HTTPStatus.OK,

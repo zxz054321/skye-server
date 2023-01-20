@@ -16,4 +16,5 @@ urlpatterns = [
     path("redeem", views.redeem),
     path("balance", views.get_balance),
     path("redeemcodes", views.get_redeemcode_history),
+    path("gifts", views.get_gift_list),
 ]
