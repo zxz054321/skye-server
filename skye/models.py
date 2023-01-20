@@ -11,7 +11,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     inviter = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, related_name="invitee"
+        User, on_delete=models.DO_NOTHING, related_name="invitee_set"
     )
     name = models.CharField(max_length=191)
     invitation_code = models.CharField(

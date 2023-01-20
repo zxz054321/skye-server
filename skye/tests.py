@@ -292,6 +292,12 @@ class ApiTests(TestCase):
             response.json()["data"]["code"], r"(\w{4})-(\w{4})-(\w{4})-(\w{4})"
         )
 
+    def test_get_invitees(self):
+        self._login_skye()
+
+        response = self.client.get("/invitees")
+        self.assertEqual(200, response.status_code)
+
     def test_redeem(self):
         self._login_skye()
 

@@ -150,6 +150,25 @@ def get_invitation_code(request):
     return JsonResponse({"data": {"code": code}}, status=HTTPStatus.OK)
 
 
+@require_safe
+@login_required
+def get_invitees(request):
+    invitees = request.user.invitee_set.all()
+    return JsonResponse(
+        {
+            "data": [
+                {
+                    "name": invitee.name,
+                    "email": invitee.user.email,
+                    "joined_at": invitee.user.date_joined,
+                }
+                for invitee in invitees
+            ]
+        },
+        status=HTTPStatus.OK,
+    )
+
+
 @require_POST
 @login_required
 def redeem(request):

@@ -12,6 +12,7 @@ urlpatterns = [
     # business
     path("ask", views.ask),
     path("invitation-code", views.get_invitation_code),
+    path("invitees", views.get_invitees),
     path("redeem", views.redeem),
     path("balance", views.get_balance),
 ]
