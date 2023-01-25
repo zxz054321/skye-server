@@ -77,6 +77,34 @@ class GrammarModel(BaseModel):
             )
 
 
+class ComplexSentenceModel(BaseModel):
+    codename = "complex_sentence.1"
+    model = "text-davinci-003"
+    temperature = 0
+
+    def set_params(self, d: dict) -> None:
+        if d["lang"] == "en":
+            self.prompt_template = (
+                "Act as an English teacher writing a short essay explaining long and difficult sentences in English to Chinese students, including the following.",
+                "- Extract the main body of the sentence and explain the main idea",
+                "- Break down the original text into simple sentences that can be understood by beginners",
+                "- Explain in detail the grammar involved in the original text",
+                "You will organise the short essay in natural language.\n",
+                'Sentence:"{sentence}"\n',
+                "Short essay:",
+            )
+        elif d["lang"] == "cn":
+            self.prompt_template = (
+                "你是一名英语老师，在写一篇短文对中国学生讲解英语长难句，包括以下内容：",
+                "- 抽出句子主干并解释大意",
+                "- 将原文拆解成多个初学者能理解的简单句",
+                "- 详细讲解原文涉及的语法知识",
+                "你会用自然的语言来组织短文，用中文作解释，并保持所引用的原文是英文。\n",
+                "长难句：“{sentence}”\n",
+                "短文：",
+            )
+
+
 class ThesisModel(BaseModel):
     codename = "thesis.1"
     model = "text-davinci-003"

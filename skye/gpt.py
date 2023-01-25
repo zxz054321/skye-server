@@ -64,6 +64,7 @@ AVAILABLE_MODELS = {
     "general": v1.GPTModel,
     "dict": v1.DictionaryModel,
     "grammar": v1.GrammarModel,
+    "complex_sentence": v1.ComplexSentenceModel,
     "thesis": v1.ThesisModel,
     "expansion": v1.ExpansionModel,
     "title_generator": v1.TitleGeneratorModel,
