@@ -338,13 +338,13 @@ class ApiTests(TestCase):
         self.assertDictEqual(
             {
                 "data": {
-                    "paid": 0,
-                    "gifted": 0,
+                    "balance": 0,
                 }
             },
             response.json(),
         )
 
+        # redeemed 10 and gifted 5
         code = "5859B1E92164423D7AF2F16A1DD77A64B1BF41EF"
         RedeemCode.objects.create(
             redeemer=self.superuser, code=code, amount=10, redeemed_at=timezone.now()
@@ -356,8 +356,7 @@ class ApiTests(TestCase):
             response.json(),
             {
                 "data": {
-                    "paid": 10,
-                    "gifted": 5,
+                    "balance": 15,
                 }
             },
         )
@@ -376,8 +375,7 @@ class ApiTests(TestCase):
             response.json(),
             {
                 "data": {
-                    "paid": 10,
-                    "gifted": 0,
+                    "balance": 10,
                 }
             },
         )
@@ -396,8 +394,7 @@ class ApiTests(TestCase):
             response.json(),
             {
                 "data": {
-                    "paid": -10,
-                    "gifted": 0,
+                    "balance": -10,
                 }
             },
         )

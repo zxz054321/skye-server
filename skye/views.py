@@ -208,17 +208,10 @@ def redeem(request):
 @login_required
 def get_balance(request):
     a = _account(request.user)
-    paid = a["paid_balance"]
-    gifted = a["gifted_balance"] - a["total_usage"]
-    if gifted < 0:
-        # gifted balance failed to cover all usage
-        paid += gifted
-        gifted = 0
     return JsonResponse(
         {
             "data": {
-                "paid": paid,
-                "gifted": gifted,
+                "balance": a["paid_balance"] + a["gifted_balance"] - a["total_usage"],
             }
         },
         status=HTTPStatus.OK,
