@@ -114,6 +114,33 @@ class ComplexSentenceModel(BaseModel):
             )
 
 
+class ThesisOutlineAssistantModel(BaseModel):
+    codename = "thesis_outline_assistant.1"
+    model = "text-davinci-003"
+    prompt_template = "这是我论文的{current_title_level}，{content}，帮我想下{next_title_level}怎么写。"
+
+    def prompt(self, **kwargs) -> str:
+        lv = kwargs["level"]
+        if lv == "title":
+            kwargs["current_title_level"] = "题目"
+            kwargs["next_title_level"] = "一级标题"
+        if lv == "h1":
+            kwargs["current_title_level"] = "一级标题"
+            kwargs["next_title_level"] = "二级标题"
+        if lv == "h2":
+            kwargs["current_title_level"] = "二级标题"
+            kwargs["next_title_level"] = "三级标题"
+        del kwargs["level"]
+        return super().prompt(**kwargs)
+
+    def set_params(self, d: dict):
+        self.temperature = {
+            "accurate": 0,
+            "balanced": 0.5,
+            "creative": 1,
+        }.get(d["mode"])
+
+
 class ThesisModel(BaseModel):
     codename = "thesis.1"
     model = "text-davinci-003"
