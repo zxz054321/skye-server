@@ -51,7 +51,7 @@ def register(request):
         user.save()
         Gift.objects.create(
             user=user,
-            amount=settings.GIFT_AMOUNT,
+            amount=settings.GIFT_AMOUNT * 2,
             reason=Gift.REASON_ACCEPTED_INVITATION,
         )
         Gift.objects.create(

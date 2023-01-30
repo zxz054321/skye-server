@@ -1,5 +1,5 @@
 from django.db.models import Sum
-from django.test import SimpleTestCase, TestCase
+from django.test import SimpleTestCase, TestCase, override_settings
 from django.utils import timezone
 
 from skye import gpt
@@ -115,6 +115,7 @@ class ApiTests(TestCase):
     def setUp(self):
         self.superuser = _create_superuser()
 
+    @override_settings(GIFT_AMOUNT=5000)
     def test_register(self):
         # test illegal invitation code
         response = self.client.post(
@@ -160,7 +161,7 @@ class ApiTests(TestCase):
             ]
 
         # test gifts
-        self.assertEqual(sum_gifted("sh.skyeharris@gmail.com"), 20000)
+        self.assertEqual(sum_gifted("sh.skyeharris@gmail.com"), 10000)
         self.assertEqual(sum_gifted("friend@mail.com"), 10000)
 
         # test duplicate registering
