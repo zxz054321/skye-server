@@ -107,7 +107,7 @@ class Gift(models.Model):
 
 class Completion(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    model = models.CharField(max_length=20)
+    model = models.CharField(max_length=35)
     prompt = models.JSONField()
     completion = models.TextField()
     finish_reason = models.CharField(max_length=50)
