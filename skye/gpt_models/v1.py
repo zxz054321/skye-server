@@ -49,12 +49,21 @@ class GPTModel(BaseModel):
 class DictionaryModel(BaseModel):
     codename = "dict.1"
     model = "text-davinci-003"
-    prompt_template = (
-        "Act as an English-Chinese dictionary. I will ask you questions in Chinese or English and you will detect the language, understand my questions and give answers in {lang}. Your answers will explain clearly why. You cannot make up any facts. Just return only answers and explanations.\n",
-        "Question: {q}",
-        "Answer:",
-    )
     temperature = 0
+
+    def set_params(self, d: dict) -> None:
+        if d["lang"] == "en":
+            self.prompt_template = (
+                "Act as an English-Chinese dictionary. I will ask you questions in Chinese or English and you will detect the language, understand my questions and give answers in English. Your answers will explain clearly why. You cannot make up any facts. Just return only answers and explanations.\n",
+                "Question: {q}",
+                "Answer:",
+            )
+        elif d["lang"] == "cn":
+            self.prompt_template = (
+                "你是一部词典。我会用自然语言向你查词。你会回答我的问题，做出解释并给出几个用法示例，但不能编造事实。\n",
+                "问题：{q}",
+                "答案：",
+            )
 
 
 class GrammarModel(BaseModel):
