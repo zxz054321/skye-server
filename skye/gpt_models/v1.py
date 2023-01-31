@@ -114,7 +114,7 @@ class ComplexSentenceModel(BaseModel):
             )
 
 
-class ThesisOutlineAssistantModel(BaseModel):
+class ThesisOutlineAssistantModel(TemperatureModeMixin, BaseModel):
     codename = "thesis_outline_assistant.1"
     model = "text-davinci-003"
     prompt_template = "这是我论文的{current_title_level}，{content}，帮我想下{next_title_level}怎么写。"
@@ -133,15 +133,8 @@ class ThesisOutlineAssistantModel(BaseModel):
         del kwargs["level"]
         return super().prompt(**kwargs)
 
-    def set_params(self, d: dict):
-        self.temperature = {
-            "accurate": 0,
-            "balanced": 0.5,
-            "creative": 1,
-        }.get(d["mode"])
 
-
-class ThesisModel(BaseModel):
+class ThesisModel(TemperatureModeMixin, BaseModel):
     codename = "thesis.1"
     model = "text-davinci-003"
     prompt_template = (
@@ -155,15 +148,8 @@ class ThesisModel(BaseModel):
         "{prompt}",
     )
 
-    def set_params(self, d: dict):
-        self.temperature = {
-            "accurate": 0,
-            "balanced": 0.5,
-            "creative": 1,
-        }.get(d["mode"])
 
-
-class ExpansionModel(BaseModel):
+class ExpansionModel(TemperatureModeMixin, BaseModel):
     codename = "expansion.1"
     model = "text-davinci-003"
     prompt_template = (
@@ -172,15 +158,8 @@ class ExpansionModel(BaseModel):
         "{prompt}",
     )
 
-    def set_params(self, d: dict):
-        self.temperature = {
-            "accurate": 0,
-            "balanced": 0.5,
-            "creative": 1,
-        }.get(d["mode"])
 
-
-class TitleGeneratorModel(BaseModel):
+class TitleGeneratorModel(TemperatureModeMixin, BaseModel):
     codename = "title_generator.1"
     model = "text-davinci-003"
     prompt_template = (
@@ -188,13 +167,6 @@ class TitleGeneratorModel(BaseModel):
         "主题：{prompt}\n",
         "标题：",
     )
-
-    def set_params(self, d: dict):
-        self.temperature = {
-            "accurate": 0,
-            "balanced": 0.5,
-            "creative": 1,
-        }.get(d["mode"])
 
 
 class GreetingGeneratorModel(TemperatureModeMixin, BaseModel):
