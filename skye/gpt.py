@@ -65,6 +65,7 @@ AVAILABLE_MODELS = {
     "dict": v1.DictionaryModel,
     "grammar": v1.GrammarModel,
     "complex_sentence": v1.ComplexSentenceModel,
+    "thesis_title_assistant": v1.ThesisTitleAssistantModel,
     "thesis_outline_assistant": v1.ThesisOutlineAssistantModel,
     "thesis": v1.ThesisModel,
     "expansion": v1.ExpansionModel,
