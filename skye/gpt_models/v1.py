@@ -120,6 +120,12 @@ class ThesisTitleAssistantModel(TemperatureModeMixin, BaseModel):
     prompt_template = "这是我的论文关键词：{prompt}。帮我想几个论文题目。"
 
 
+class ThesisAbstractAssistantModel(TemperatureModeMixin, BaseModel):
+    codename = "thesis_abstract_assistant.1"
+    model = "text-davinci-003"
+    prompt_template = "这是我的论文题目：{prompt}。帮我写个简短摘要。"
+
+
 class ThesisOutlineAssistantModel(TemperatureModeMixin, BaseModel):
     codename = "thesis_outline_assistant.1"
     model = "text-davinci-003"
