@@ -54,7 +54,7 @@ class DictionaryModel(BaseModel):
     def set_params(self, d: dict) -> None:
         if d["lang"] == "en":
             self.prompt_template = (
-                "Act as an English-Chinese dictionary. I will ask you questions in Chinese or English and you will detect the language, understand my questions and give answers in English. Your answers will explain clearly why. You cannot make up any facts. Just return only answers and explanations.\n",
+                "Act as a dictionary. You will answer my questions by giving a detailed explanation and various examples in English, but don't make up facts.\n",
                 "Question: {q}",
                 "Answer:",
             )
