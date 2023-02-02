@@ -68,6 +68,7 @@ AVAILABLE_MODELS = {
     "thesis_title_assistant": v1.ThesisTitleAssistantModel,
     "thesis_abstract_assistant": v1.ThesisAbstractAssistantModel,
     "thesis_outline_assistant": v1.ThesisOutlineAssistantModel,
+    "thesis_statement_expansion": v1.ThesisStatementExpansionModel,
     "thesis": v1.ThesisModel,
     "expansion": v1.ExpansionModel,
     "title_generator": v1.TitleGeneratorModel,

@@ -146,6 +146,12 @@ class ThesisOutlineAssistantModel(TemperatureModeMixin, BaseModel):
         return super().prompt(**kwargs)
 
 
+class ThesisStatementExpansionModel(TemperatureModeMixin, BaseModel):
+    codename = "thesis_statement_expansion.1"
+    model = "text-davinci-003"
+    prompt_template = "这是论文的一个论点，请专业论述，分段，词语不要过多重复：{prompt}"
+
+
 class ThesisModel(TemperatureModeMixin, BaseModel):
     codename = "thesis.1"
     model = "text-davinci-003"
