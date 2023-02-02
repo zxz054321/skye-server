@@ -149,7 +149,7 @@ class ThesisOutlineAssistantModel(TemperatureModeMixin, BaseModel):
 class ThesisStatementExpansionModel(TemperatureModeMixin, BaseModel):
     codename = "thesis_statement_expansion.1"
     model = "text-davinci-003"
-    prompt_template = "这是论文的一个论点，请专业论述，分段，词语不要过多重复：{prompt}"
+    prompt_template = "This is one of the arguments of the thesis：{prompt}. Please use Chinese paragraphs. Please ensure the professionalism and diversity of the discussion, and use different professional cases for each argument.Please use a variety of sentence patterns to avoid being seen as machine-generated."
 
 
 class ThesisModel(TemperatureModeMixin, BaseModel):
