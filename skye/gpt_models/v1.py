@@ -32,7 +32,7 @@ class BaseModel:
 
 
 class TemperatureModeMixin:
-    def set_params(self, d: dict):
+    def set_params(self, d: dict) -> None:
         self.temperature = {
             "accurate": 0,
             "balanced": 0.5,
