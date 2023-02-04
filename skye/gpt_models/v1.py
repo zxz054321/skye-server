@@ -74,15 +74,14 @@ class GrammarModel(BaseModel):
     def set_params(self, d: dict) -> None:
         if d["lang"] == "en":
             self.prompt_template = (
-                "Correct sentences to standard English. Point out and explain the errors in the sentences and interpret the grammatical knowledge involved in the errors.\n",
-                'Sentences:"{sentences}"',
-                "Correction:",
+                "The following text may have grammatical errors: {sentences}\n",
+                "First check the original text for grammatical errors and give a report, detailing where and why if there are errors; then correct all grammatical errors and return all available corrections that ensure grammatical correctness, each with an appropriate explanation.",
+                "Error Report:",
             )
         elif d["lang"] == "cn":
             self.prompt_template = (
-                "将句子纠正为标准英语。指出并解释句子中的错误，解释错误中涉及的语法知识。\n",
-                "句子：“{sentences}”",
-                "纠正：",
+                "这可能是一个存在错误的句子：{sentences}\n",
+                "首先检查原句是否存在语法错误并给出报告，有错误的话要详细说明错误的位置和原因；然后纠正所有语法错误，返回所有可行的改法，每种改法都要有相应的解释。",
             )
 
 
